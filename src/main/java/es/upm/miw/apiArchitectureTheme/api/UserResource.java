@@ -15,7 +15,7 @@ public class UserResource {
     
     // GET **/users
     public UserListWrapper userList() {
-        return new UserController().themeList();
+        return new UserController().userList();
     }
 
     // POST **/users   body="nick,email"
