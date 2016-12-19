@@ -35,7 +35,16 @@ public class UserController {
       }
 
     public void addSport(String user, String sport) {
-        DaoFactory.getFactory().getUserDao().addSport(user, sport);
+        User userObject = DaoFactory.getFactory().getUserDao().getByName(user);
+        Sport sportObject = DaoFactory.getFactory().getSportDao().getByName(sport);
+        if (userObject != null) {
+            if (sportObject != null) {
+                DaoFactory.getFactory().getUserDao().addSport(userObject, sportObject);
+            } else {
+
+            }
+        } else {
+        }
     }
     
     public List<User> getAllUsers() {

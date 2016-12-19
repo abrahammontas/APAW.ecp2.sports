@@ -1,7 +1,5 @@
 package es.upm.miw.apiArchitectureTheme.entities;
 
-import java.util.List;
-
 public class Sport {
 
     private int id;

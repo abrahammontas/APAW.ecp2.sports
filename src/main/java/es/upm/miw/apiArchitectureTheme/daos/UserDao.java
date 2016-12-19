@@ -7,7 +7,7 @@ import es.upm.miw.apiArchitectureTheme.entities.Sport;
 
 public interface UserDao extends GenericDao<User, Integer> {
 
-    public abstract void addSport(String user, String sport);
+    public abstract void addSport(User user, Sport sport);
 
     public abstract List<User> usersBySport(String sport);
 
