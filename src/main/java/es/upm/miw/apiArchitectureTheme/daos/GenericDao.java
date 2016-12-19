@@ -1,17 +1,20 @@
 package es.upm.miw.apiArchitectureTheme.daos;
 
-import java.util.List;
+public abstract class DaoFactory {
 
-public interface GenericDao<T, ID> {
+    public static DaoFactory factory = null;
 
-    void create(T entity);
+    public static void setFactory(DaoFactory factory) {
+        DaoFactory.factory = factory;
+    }
 
-    T read(ID id);
+    public static DaoFactory getFactory() {
+        assert factory != null;
+        return factory;
+    }
 
-    void update(T entity);
+    public abstract UserDao getUserDao();
 
-    void deleteById(ID id);
-
-    List<T> findAll();
+    public abstract SportDao getSportDao();
 
 }
