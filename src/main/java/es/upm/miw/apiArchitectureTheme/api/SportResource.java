@@ -13,11 +13,6 @@ public class SportResource {
         }
     }
     
-    // GET **/sports
-    public SportListWrapper userList() {
-        return new SportController().sportList();
-    }
-
     // POST **/sport   body="name"
     public void createSport(String name) throws InvalidThemeFieldException {
         this.validateField(name);
