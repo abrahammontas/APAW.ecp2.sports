@@ -5,6 +5,8 @@ import java.util.List;
 import es.upm.miw.apiArchitectureTheme.daos.DaoFactory;
 import es.upm.miw.apiArchitectureTheme.entities.Sport;
 import es.upm.miw.apiArchitectureTheme.entities.User;
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidSportException;
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidUserFieldException;
 import es.upm.miw.apiArchitectureTheme.wrappers.UserListWrapper;
 import es.upm.miw.apiArchitectureTheme.wrappers.UserWrapper;
 
@@ -34,16 +36,18 @@ public class UserController {
           return userListWrapper;
       }
 
-    public void addSport(String user, String sport) {
-        User userObject = DaoFactory.getFactory().getUserDao().getByName(user);
-        Sport sportObject = DaoFactory.getFactory().getSportDao().getByName(sport);
-        if (userObject != null) {
-            if (sportObject != null) {
-                DaoFactory.getFactory().getUserDao().addSport(userObject, sportObject);
+    public void addSport(String user, String sport) throws InvalidUserFieldException, InvalidSportException {
+        User userEntity = DaoFactory.getFactory().getUserDao().getByName(user);
+        Sport sportEntity = DaoFactory.getFactory().getSportDao().getByName(sport);
+        
+        if (userEntity != null) {
+            if (sportEntity != null) {
+                DaoFactory.getFactory().getUserDao().addSport(userEntity, sportEntity);
             } else {
-
+                throw new InvalidSportException(sport);
             }
         } else {
+            throw new InvalidUserFieldException(user);
         }
     }
     

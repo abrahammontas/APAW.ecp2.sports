@@ -1,12 +1,14 @@
 package es.upm.miw.apiArchitectureTheme;
 
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidNameException;
+import es.upm.miw.apiArchitectureTheme.exceptions.SportNameNotDefined;
 import es.upm.miw.web.http.HttpRequest;
 import es.upm.miw.web.http.HttpResponse;
 
 public class Server {
 	private Dispatcher dispatcher = new Dispatcher();
 
-	public HttpResponse request(HttpRequest request) {
+	public HttpResponse request(HttpRequest request) throws InvalidNameException, SportNameNotDefined {
 		HttpResponse response = new HttpResponse();
 		switch (request.getMethod()) {
 		case POST:

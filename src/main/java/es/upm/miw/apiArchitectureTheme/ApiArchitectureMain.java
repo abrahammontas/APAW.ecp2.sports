@@ -2,6 +2,8 @@ package es.upm.miw.apiArchitectureTheme;
 
 import es.upm.miw.apiArchitectureTheme.daos.DaoFactory;
 import es.upm.miw.apiArchitectureTheme.daos.memory.DaoFactoryMemory;
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidNameException;
+import es.upm.miw.apiArchitectureTheme.exceptions.SportNameNotDefined;
 import es.upm.miw.web.http.HttpMethod;
 import es.upm.miw.web.http.HttpRequest;
 import es.upm.miw.web.http.HttpResponse;
@@ -114,7 +116,14 @@ public class ApiArchitectureMain {
 
     public void request() {
         IO.getIO().println(request.toString());
-        HttpResponse response = server.request(request);
+        HttpResponse response = null;
+        try {
+            response = server.request(request);
+        } catch (InvalidNameException e) {
+            e.printStackTrace();
+        } catch (SportNameNotDefined e) {
+            e.printStackTrace();
+        }
         IO.getIO().println(response);
         IO.getIO().println("---------------------------------------ooo----------------------------------------");
     }

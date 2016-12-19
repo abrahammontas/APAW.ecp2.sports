@@ -2,8 +2,10 @@ package es.upm.miw.apiArchitectureTheme;
 
 import es.upm.miw.apiArchitectureTheme.api.UserResource;
 import es.upm.miw.apiArchitectureTheme.api.SportResource;
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidNameException;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidRequestException;
-import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
+import es.upm.miw.apiArchitectureTheme.exceptions.InvalidUserFieldException;
+import es.upm.miw.apiArchitectureTheme.exceptions.SportNameNotDefined;
 import es.upm.miw.web.http.HttpRequest;
 import es.upm.miw.web.http.HttpResponse;
 import es.upm.miw.web.http.HttpStatus;
@@ -35,7 +37,7 @@ public class Dispatcher {
 		}
 	}
 
-	public void doPost(HttpRequest request, HttpResponse response) {
+	public void doPost(HttpRequest request, HttpResponse response) throws InvalidNameException, SportNameNotDefined {
 		 switch (request.getPath()) {
 		 // POST **/users body="nick:email"
 		 case "users":
@@ -45,7 +47,7 @@ public class Dispatcher {
     		 try {
         		 userResource.createUser(nick, email);
         		 response.setStatus(HttpStatus.CREATED);
-    		 } catch (InvalidThemeFieldException e) {
+    		 } catch (InvalidUserFieldException e) {
     		     this.responseError(response, e);
     		 }
 		 break;
