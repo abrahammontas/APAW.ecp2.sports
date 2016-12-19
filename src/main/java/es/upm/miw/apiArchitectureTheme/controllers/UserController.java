@@ -11,7 +11,7 @@ import es.upm.miw.apiArchitectureTheme.wrappers.UserWrapper;
 public class UserController {
 
     public UserListWrapper userList() {
-        List<User> userList = DaoFactory.getFactory().getUserDao().findAll();
+        List<User> userList = getAllUsers();
         UserListWrapper userListWrapper = new UserListWrapper();
         for (User user : userList) {
             userListWrapper.addUserWrapper(new UserWrapper(user.getNick(), user.getEmail()));
@@ -36,5 +36,10 @@ public class UserController {
 
     public void addSport(String user, String sport) {
         DaoFactory.getFactory().getUserDao().addSport(user, sport);
+    }
+    
+    public List<User> getAllUsers() {
+        List<User> userList = DaoFactory.getFactory().getUserDao().findAll();
+        return userList;
     }
 }

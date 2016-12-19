@@ -14,91 +14,115 @@ public class ApiArchitectureMain {
 	private HttpRequest request = new HttpRequest();
 
 	public void help() {
-		IO.getIO().println("GET **/themes");
-		IO.getIO().println("POST **/themes   body=\"themeName\"");
-		IO.getIO().println("GET **/themes/{id}/overage");
-		IO.getIO().println("POST **/votes   body=\"themeId:vote\"");
-		IO.getIO().println("GET **/votes");
+		IO.getIO().println("GET **/users");
+		IO.getIO().println("POST **/users   body=\"nick:email\"");
+        IO.getIO().println("POST **/sports   body=\"sportname\"");
+		IO.getIO().println("PUT **/users/{nick}/sport body=\"sportname\"");
+		IO.getIO().println("GET **/users/search?sport=*");
 	}
 
-	public void demo() {
-		request.setMethod(HttpMethod.POST);
-		request.setPath("themes");
-		request.setBody("uno");
-		this.request();
-		request.setBody("dos");
-		this.request();
-		request.setPath("votes");
-		request.setBody("1:4");
-		this.request();
-		request.setBody("1:5");
-		this.request();
-		request.setBody("2:5");
-		this.request();
-		request.setBody("2:6");
-		this.request();
-		request.setMethod(HttpMethod.GET);
-		request.setPath("votes");
-		request.clearQueryParams();
-		request.setBody("");
-		this.request();
-		request.setPath("themes");
-		this.request();
-		request.setPath("themes/1/overage");
-		this.request();
-		request.setPath("themes/2/overage");
-		this.request();
-		//Exceptions
-		request.setPath("noValid");
-		this.request();
-		request.setPath("themes/x/overage");
-		this.request();
-		request.setPath("themes/99/overage");
-		this.request();
-		request.setMethod(HttpMethod.POST);
-		request.setPath("votes");
-		request.setBody("99:4");
-		this.request();
-	}
+    public void demo() {
+        request.setMethod(HttpMethod.POST);
+        
+        request.setPath("users");
+        
+        request.setBody("uno:uno@gmail.com");
+        this.request();
+        
+        request.setBody("dos:dos@gmail.com");
+        this.request();
+        
+        request.setBody("uno:tres@gmail.com");
+        this.request();
+        
+        request.setBody(null);
 
-	public void httpMethod() {
-		request.setMethod((HttpMethod) IO.getIO().select(HttpMethod.values(), "Elige método"));
-		this.showStatus();
-	}
+        request.setMethod(HttpMethod.GET);
+        
+        request.setPath("users");
+        this.request();
 
-	public void path() {
-		request.setPath(IO.getIO().readString("Path"));
-		this.showStatus();
-	}
+        request.setMethod(HttpMethod.POST);
+        
+        request.setPath("sports");
+        request.setBody("tenis");
+        this.request();
+        
+        request.setBody("tenis");
+        this.request();
+        
+        request.setBody("ajedrez");
+        this.request();
 
-	public void addQueryParam() {
-		String[] msgs = { "Nombre", "Valor" };
-		String[] campos = { "String", "String" };
-		Object[] values = IO.getIO().readForm(campos, msgs);
-		request.addQueryParam((String) values[0], (String) values[1]);
-		this.showStatus();
-	}
+        request.setMethod(HttpMethod.PUT);
+        
+        request.setPath("users/uno/sport");
+        request.setBody("tenis");
+        this.request();
+        
+        request.setBody("noDeporte");
+        this.request();
+        
+        request.setPath("users/dos/sport");
+        request.setBody("tenis");
+        this.request();
+        
+        request.setBody("ajedrez");
+        this.request();
+        
+        request.setBody(null);
 
-	public void clearQueryParams() {
-		request.clearQueryParams();
-		this.showStatus();
-	}
+        request.setMethod(HttpMethod.GET);
+        
+        request.setPath("users/search");
+        request.addQueryParam("sport", "tenis");
+        this.request();
+        
+        request.clearQueryParams();
 
-	private void showStatus() {
-		IO.getIO().setStatusBar(request.toString());
-	}
+        request.setMethod(HttpMethod.POST);
+        request.setPath("noPath");
+        this.request();
+    }
 
-	public void request() {
-		IO.getIO().println(request.toString());
-		HttpResponse response = server.request(request);
-		IO.getIO().println(response);
-		IO.getIO().println("---------------------------------------ooo----------------------------------------");
-	}
+    public void httpMethod() {
+        request.setMethod((HttpMethod) IO.getIO().select(HttpMethod.values(), "Elige método"));
+        this.showStatus();
+    }
 
-	public static void main(String[] args) {
-		ApiArchitectureMain main = new ApiArchitectureMain();
-		IO.getIO().addView(main);
-		main.showStatus();
-		DaoFactory.setFactory(new DaoFactoryMemory());
-	}
+    public void path() {
+        request.setPath(IO.getIO().readString("Path"));
+        this.showStatus();
+    }
+
+    public void addQueryParam() {
+        String[] msgs = { "Nombre", "Valor" };
+        String[] campos = { "String", "String" };
+        Object[] values = IO.getIO().readForm(campos, msgs);
+        request.addQueryParam((String) values[0], (String) values[1]);
+        this.showStatus();
+    }
+
+    public void clearQueryParams() {
+        request.clearQueryParams();
+        this.showStatus();
+    }
+
+    private void showStatus() {
+        IO.getIO().setStatusBar(request.toString());
+    }
+
+    public void request() {
+        IO.getIO().println(request.toString());
+        HttpResponse response = server.request(request);
+        IO.getIO().println(response);
+        IO.getIO().println("---------------------------------------ooo----------------------------------------");
+    }
+
+    public static void main(String[] args) {
+        ApiArchitectureMain main = new ApiArchitectureMain();
+        IO.getIO().addView(main);
+        main.showStatus();
+        DaoFactory.setFactory(new DaoFactoryMemory());
+    }
 }

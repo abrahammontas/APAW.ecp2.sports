@@ -3,6 +3,7 @@ package es.upm.miw.apiArchitectureTheme.daos.memory;
 import java.util.HashMap;
 import java.util.List;
 
+import es.upm.miw.apiArchitectureTheme.daos.DaoFactory;
 import es.upm.miw.apiArchitectureTheme.daos.UserDao;
 import es.upm.miw.apiArchitectureTheme.entities.Sport;
 import es.upm.miw.apiArchitectureTheme.entities.User;
@@ -24,8 +25,9 @@ public class UserDaoMemory extends GenericMemoryDao<User> implements UserDao {
     }
     
     @Override
-    public void addSport(User entity, Sport sport) {
-        this.read(entity.getId()).getSports().add(sport);
+    public void addSport(String user, String sport) {
+        User userEntity = DaoFactory.getFactory().getUserDao().getByName(user);
+        this.read(userEntity.getId()).getSports().add(sport);
     }
 
     @Override

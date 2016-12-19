@@ -2,8 +2,6 @@ package es.upm.miw.apiArchitectureTheme.api;
 
 import es.upm.miw.apiArchitectureTheme.controllers.SportController;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
-import es.upm.miw.apiArchitectureTheme.exceptions.NotFoundThemeIdException;
-import es.upm.miw.apiArchitectureTheme.wrappers.SportListWrapper;
 
 public class SportResource {
 

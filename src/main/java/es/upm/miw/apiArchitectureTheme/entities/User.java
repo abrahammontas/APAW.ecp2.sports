@@ -41,4 +41,9 @@ public class User {
         return "User [nick=" + nick + ", email=" + email + "]";
     }
 
+    public List<User> getSports() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
