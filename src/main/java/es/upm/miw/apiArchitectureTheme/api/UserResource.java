@@ -30,5 +30,11 @@ public class UserResource {
         this.validateField(sport);
         return new UserController().usersBySport(sport);
     }
+    
+    // POST **/users/{nick}/sport    body="nick,email"
+    public void addSport(String sport) throws InvalidThemeFieldException {
+        this.validateField(sport);
+        new UserController().addSport(sport);
+    }
 
 }
