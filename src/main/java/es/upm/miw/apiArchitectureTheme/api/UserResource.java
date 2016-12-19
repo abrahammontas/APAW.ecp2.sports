@@ -1,6 +1,7 @@
 package es.upm.miw.apiArchitectureTheme.api;
 
 import es.upm.miw.apiArchitectureTheme.controllers.UserController;
+import es.upm.miw.apiArchitectureTheme.entities.User;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidThemeFieldException;
 import es.upm.miw.apiArchitectureTheme.exceptions.NotFoundThemeIdException;
 import es.upm.miw.apiArchitectureTheme.wrappers.UserListWrapper;
@@ -26,15 +27,15 @@ public class UserResource {
     }
     
     // GET **users/search?sport=*
-    public UserListWrapper searchBySport(String sport) throws NotFoundThemeIdException {
+    public UserListWrapper searchBySport(String sport) throws NotFoundThemeIdException, InvalidThemeFieldException {
         this.validateField(sport);
         return new UserController().usersBySport(sport);
     }
     
     // POST **/users/{nick}/sport    body="nick,email"
-    public void addSport(String sport) throws InvalidThemeFieldException {
+    public void addSport(String user, String sport) throws InvalidThemeFieldException {
         this.validateField(sport);
-        new UserController().addSport(sport);
+        new UserController().addSport(user, sport);
     }
 
 }

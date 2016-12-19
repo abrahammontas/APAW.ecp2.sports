@@ -21,7 +21,7 @@ public class Dispatcher {
 	public void doGet(HttpRequest request, HttpResponse response) {
 		// **/users
 		if ("users".equals(request.getPath())) {
-			response.setBody(userResource.usersList().toString());
+			response.setBody(userResource.userList().toString());
 			// **/users/search
 		} else if ("users".equals(request.paths()[0]) && "search".equals(request.paths()[1])
 				&& (request.getParams().size() == 1 && request.getParams().containsKey("sport"))) {
@@ -53,7 +53,7 @@ public class Dispatcher {
 		 // POST sports body="name"
 		 case "sports":
     		 try {
-        		 sportResource.createVote(request.getBody());
+        		 sportResource.createSport(request.getBody());
         		 response.setStatus(HttpStatus.CREATED);
     		 } catch (Exception e) {
     		     responseError(response, e);
