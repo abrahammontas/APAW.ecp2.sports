@@ -1,5 +1,7 @@
 package es.upm.miw.apiArchitectureTheme.daos;
 
-public class SportDao {
+import es.upm.miw.apiArchitectureTheme.entities.Sport;
 
+public interface SportDao extends GenericDao<Sport, Integer> {
+    
 }

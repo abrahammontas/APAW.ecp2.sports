@@ -2,7 +2,7 @@ package es.upm.miw.apiArchitectureTheme.daos.memory;
 
 import java.util.HashMap;
 
-import es.upm.miw.apiArchitectureTheme.daos.User;
+import es.upm.miw.apiArchitectureTheme.daos.UserDao;
 import es.upm.miw.apiArchitectureTheme.entities.User;
 
 public class UserDaoMemory extends GenericMemoryDao<User> implements UserDao {
